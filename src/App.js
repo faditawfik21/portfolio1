@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    (async function () {
+      const { text } = await( await fetch(`/api/message`)).json();
+      setData(text);
+    })();
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -43,6 +52,7 @@ function App() {
                 <input type="submit" value="Submit" />
               </form>
         </div>
+        <div>{data}</div>
         {/* <section>
           <h2>Contact Me</h2>
           <p>You can reach me at myemail@example.com</p>
